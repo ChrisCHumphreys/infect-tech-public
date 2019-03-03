@@ -1,0 +1,42 @@
+<!doctype html>
+<head>
+  <title>{% block title %}{% endblock %} - Infect</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  <script src="https://www.gstatic.com/firebasejs/5.8.5/firebase.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/5.8.4/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/5.8.4/firebase-firestore.js"></script>
+  <script>
+    // Initialize Firebase
+    var config = {
+      apiKey: "{{ FB_KEY }}",
+      authDomain: "infect-dot.firebaseapp.com",
+      databaseURL: "https://infect-dot.firebaseio.com",
+      projectId: "infect-dot",
+      storageBucket: "infect-dot.appspot.com",
+      messagingSenderId: "437086746749"
+    };
+    firebase.initializeApp(config);
+  </script>
+    <script src="../static/scripts.js"></script>
+</head>
+<nav>
+  <h1>Infect</h1>
+  <ul>
+    {% if g.user %}
+      <li><span>{{ g.user['username'] }}</span>
+      <li><a href="{{ url_for('auth.logout') }}">Log Out</a>
+    {% else %}
+      <li><a href="{{ url_for('auth.register') }}">Register</a>
+      <li><a href="{{ url_for('auth.login') }}">Log In</a>
+    {% endif %}
+  </ul>
+</nav>
+<section class="content">
+  <header>
+    {% block header %}{% endblock %}
+  </header>
+  {% for message in get_flashed_messages() %}
+    <div class="flash">{{ message }}</div>
+  {% endfor %}
+  {% block content %}{% endblock %}
+</section>

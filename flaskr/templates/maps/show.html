@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Maps!
+{% endblock %}
+
+{% block header %}
+Maps
+{% endblock %}
+
+{% block content %}
+<div id="map"> </div>
+<button id="play" onClick="addToGame({{ g.user['id'] }})">Play</button>
+<button id="refresh" onClick="getMarkers()">Get markers</button>
+<button id="clear" onclick="clearMap()">Clear</button>
+<button id="delete" onclick="deleteMarkeres()">Delete</button>
+    <button id="update" onclick="autoUpdate({{ g.user['id'] }})">Refresh</button>
+<script src="https://maps.googleapis.com/maps/api/js?key={{ key }}&callback=initMap"
+async defer></script>
+<script src="../../static/scripts.js">initMap()</script>
+
+{% endblock %}'

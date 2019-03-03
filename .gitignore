@@ -1,0 +1,7 @@
+flaskr/venv
+*.pyc
+.DS_Store
+instance
+*.env
+.env
+/.idea/encodings.xml
